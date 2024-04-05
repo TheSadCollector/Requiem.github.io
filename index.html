@@ -6,15 +6,30 @@
     <title>‎ </title>
     <style>
         body {
-            background-color: #222;  /* Dark gray background */
-            color: #0f0;           /* Green text */
-            font-family: monospace;
+            background-color: #222; 
+            color: #0f0;
+            font-family: Courier, monospace;
+            font-size: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 0;
+        }   
+        
+        .cursor {
+            display: inline-block;
+            width: 1.25px;
+            height: 13px;
+            background-color: #0f0;  
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+        50% {
+            visibility: hidden;
+            }
         }
     </style>
 </head>
@@ -31,6 +46,7 @@
    \/__/            /:/  /     \:\ \/__/              \:\  \        \:\/:/  /     \:\  \    \:\  \    \:\ \/__/     \:\  \        \/__/         \:\/:/  /      |:|\/__/  
                    /:/  /       \:\__\                 \:\__\        \::/  /       \:\__\    \:\__\    \:\__\        \:\__\                      \::/  /       |:|  |    
                    \/__/         \/__/                  \/__/         \/__/         \/__/     \/__/     \/__/         \/__/                       \/__/         \|__|    
-    </pre>
+    
+    C:\Users\The_Collector><span class="cursor"></span> </pre>
 </body>
 </html>
