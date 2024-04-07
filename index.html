@@ -26,7 +26,14 @@
             background-color: #0f0;  
             animation: blink 0.7s step-end infinite;
         }
-
+        
+        #canvas {
+            color: #0f0;
+            white-space: pre;
+            margin: 0 auto; 
+            display: block;
+        }
+        
         @keyframes blink {
         50% {
             visibility: hidden;
@@ -49,8 +56,8 @@
                    \/__/         \/__/                  \/__/         \/__/         \/__/     \/__/     \/__/         \/__/                       \/__/         \|__|    
 
         
-    <pre id="canvas" style="color: #222; white-space: pre;"></pre>
-    <script src="./main.js"></script>
+    <pre id="canvas"><script src="./main.js"></script></pre>
+    
     </pre>
 </body>
 </html>
