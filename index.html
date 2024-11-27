@@ -3,35 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>‎ </title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico?">
+    <title>Pong Game</title>
     <style>
         body {
-            background-color: #222; 
-            color: #0f0;
-            font-family: Courier, monospace;
-            font-size: 48px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-        }   
-        
-        .cursor {
-            display: inline-block;
-            width: 1.25px;
-            height: 13.5px;
-            background-color: #0f0;  
-            animation: blink 0.7s step-end infinite;
+            background-color: #000;
         }
-        
+        canvas {
+            border: 2px solid white;
+        }
     </style>
 </head>
 <body>
-    <pre>
-    poop
-    </pre>
+    <canvas id="pongCanvas"></canvas>
+    <script src="script.js"></script>
 </body>
 </html>
