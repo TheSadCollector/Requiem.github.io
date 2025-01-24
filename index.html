@@ -1,25 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LESSSGOOOO PONG</title>
+    <title>u smell</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            background-color: #000;
+            overflow: hidden;
+            background: #000;
+            position: relative;
         }
         canvas {
-            border: 2px solid white;
+            display: block;
+        }
+        #fartText {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 3em;
+            text-shadow: 0 0 10px #0f0;
+            opacity: 0;
+            animation: fadeInOut 4s infinite;
+            z-index: 1;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <canvas id="pongCanvas"></canvas>
-    <script src="script.js"></script>
+    <div id="fartText">I FARTED</div>
+    <canvas id="matrix"></canvas>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+[]{}|;:,.<>?";
+        const charset = chars.split('');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const fontSize = 18;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = [];
+        
+        for (let i = 0; i < columns; i++) {
+            drops.push({
+                y: Math.random() * -canvas.height,
+                speed: 3 + Math.random() * 4,
+                char: charset[Math.floor(Math.random() * charset.length)]
+            });
+        }
+
+        ctx.font = fontSize + 'px monospace';
+        ctx.fillStyle = '#0f0';
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f0';
+
+            drops.forEach((drop, i) => {
+                const x = i * fontSize;
+                ctx.fillText(drop.char, x, drop.y);
+                if (drop.y > canvas.height) {
+                    drop.y = -fontSize;
+                    drop.char = charset[Math.floor(Math.random() * charset.length)];
+                } else {
+                    drop.y += drop.speed;
+                }
+                if (Math.random() > 0.97) {
+                    drop.char = charset[Math.floor(Math.random() * charset.length)];
+                }
+            });
+
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
 </body>
 </html>
