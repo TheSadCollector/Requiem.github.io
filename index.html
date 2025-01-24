@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>u smell</title>
+    <title>u stink</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            background: #000;
+            background: black;
             position: relative;
         }
         canvas {
@@ -17,10 +17,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #0f0;
+            color: #8B4513; 
             font-family: 'Courier New', monospace;
             font-size: 3em;
-            text-shadow: 0 0 10px #0f0;
+            text-shadow: 0 0 10px rgba(139, 69, 19, 0.5);
             opacity: 0;
             animation: fadeInOut 4s infinite;
             z-index: 1;
@@ -40,54 +40,48 @@
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+[]{}|;:,.<>?";
-        const charset = chars.split('');
+        const icon = new Image();
+        icon.src = 'favicon.ico';
 
-        function resize() {
+        function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        resize();
-        window.addEventListener('resize', resize);
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-        const fontSize = 18;
-        const columns = Math.floor(canvas.width / fontSize);
+        const iconSize = 78;
+        const columns = Math.floor(canvas.width / iconSize);
         const drops = [];
         
         for (let i = 0; i < columns; i++) {
             drops.push({
                 y: Math.random() * -canvas.height,
-                speed: 3 + Math.random() * 4,
-                char: charset[Math.floor(Math.random() * charset.length)]
+                speed: 3 + Math.random() * 2
             });
         }
 
-        ctx.font = fontSize + 'px monospace';
-        ctx.fillStyle = '#0f0';
-
         function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0f0';
 
             drops.forEach((drop, i) => {
-                const x = i * fontSize;
-                ctx.fillText(drop.char, x, drop.y);
+                const x = i * iconSize;
+                if(icon.complete) {
+                    ctx.drawImage(icon, x, drop.y, iconSize, iconSize);
+                }
+                
                 if (drop.y > canvas.height) {
-                    drop.y = -fontSize;
-                    drop.char = charset[Math.floor(Math.random() * charset.length)];
+                    drop.y = Math.random() * -iconSize;
                 } else {
                     drop.y += drop.speed;
-                }
-                if (Math.random() > 0.97) {
-                    drop.char = charset[Math.floor(Math.random() * charset.length)];
                 }
             });
 
             requestAnimationFrame(draw);
         }
 
-        draw();
+        icon.onload = draw;
     </script>
 </body>
 </html>
